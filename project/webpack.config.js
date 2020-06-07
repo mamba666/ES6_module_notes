@@ -8,6 +8,8 @@ const htmlPlugin = new HtmlWebpackPlugin({
   filename: "index.html"
 })
 
+const VueLoaderPlugin = require("vue-loader/lib/plugin")
+
 module.exports = {
   mode: "development",  //指定构建模式
   // __dirname为webpack.config.js的绝对路径
@@ -17,7 +19,10 @@ module.exports = {
     filename: "bundle.js"
   },
   // webpack打包期间会用到的插件
-  plugins: [htmlPlugin],
+  plugins: [
+    htmlPlugin,
+    new VueLoaderPlugin()
+  ],
   module: {
     rules: [
       { test: /\.css$/, use: ["style-loader", "css-loader", "postcss-loader"] },
@@ -32,7 +37,9 @@ module.exports = {
             limit: 31428550
           }
         }]
-      }
+      },
+      { test: /\.js$/, use: "babel-loader", exclude: /node_modules/ },
+      { test: /\.vue$/, use: "vue-loader" }
     ]
   }
 }

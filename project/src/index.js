@@ -1,5 +1,12 @@
 import "./css/1.css"
 import "./css/2.less"
+import APP from "./components/app.vue"
+import Vue from "vue"
+
+let vm = new Vue({
+  el: "#app",
+  render: h => h(APP)
+})
 // import "./css/3.sass"
 window.onload = function () {
   let li = document.getElementsByTagName("li")
@@ -11,3 +18,8 @@ window.onload = function () {
     }
   }
 }
+
+class Person {
+  static info = "aaa"
+}
+console.log(Person.info)
